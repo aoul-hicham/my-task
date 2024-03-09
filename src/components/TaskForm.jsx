@@ -3,7 +3,7 @@ import Tag from "./Tag"
 
 import "./TaskForm.css"
 
-const TaskForm = () => {
+const TaskForm = ({ setTask }) => {
   const [taskForm, setTaskForm] = useState({
     task: null,
     status: "todo",
@@ -41,11 +41,11 @@ const TaskForm = () => {
     }
   }
 
-  console.log(taskForm.tags)
-
   //* Handling form submit
   const handleSubmit = (e) => {
     e.preventDefault()
+
+    setTask((data) => [...data, taskForm])
   }
 
   return (
@@ -53,6 +53,7 @@ const TaskForm = () => {
       <header className="app_header">
         <form onSubmit={handleSubmit}>
           <input
+            autoComplete="off"
             type="text"
             name="task"
             className="task_input"

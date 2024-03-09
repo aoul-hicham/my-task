@@ -10,7 +10,7 @@ const Tag = ({ tagName, selectTag, isSelected }) => {
   }
   return (
     <button
-      type="submit"
+      type="button"
       className="tag"
       style={isSelected ? tagStyles[tagName] : tagStyles["Default"]}
       onClick={() => selectTag(tagName)}
