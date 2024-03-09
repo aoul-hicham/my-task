@@ -5,7 +5,7 @@ import "./TaskForm.css"
 
 const TaskForm = ({ setTask }) => {
   const [taskForm, setTaskForm] = useState({
-    task: null,
+    task: "",
     status: "todo",
     tags: [],
   })
@@ -46,6 +46,12 @@ const TaskForm = ({ setTask }) => {
     e.preventDefault()
 
     setTask((data) => [...data, taskForm])
+
+    setTaskForm({
+      task: "",
+      status: "todo",
+      tags: [],
+    })
   }
 
   return (
@@ -56,6 +62,7 @@ const TaskForm = ({ setTask }) => {
             autoComplete="off"
             type="text"
             name="task"
+            value={taskForm.task}
             className="task_input"
             placeholder="Enter your task"
             onChange={handlingInputchange}
@@ -73,7 +80,13 @@ const TaskForm = ({ setTask }) => {
             </div>
 
             <div>
-              <select name="status" id="" className="task_status" onChange={handlingInputchange}>
+              <select
+                name="status"
+                id=""
+                className="task_status"
+                onChange={handlingInputchange}
+                value={taskForm.status}
+              >
                 <option value="todo">To do</option>
                 <option value="doing">Doing</option>
                 <option value="done">Done</option>
