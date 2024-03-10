@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "./App.css"
 import TaskColumn from "./components/TaskColumn"
 import TaskForm from "./components/TaskForm"
@@ -7,8 +7,14 @@ import doingIcon from "./assets/glowing-star.png"
 import doneIcon from "./assets/check-mark-button.png"
 
 function App() {
-  const [task, setTask] = useState([])
+  const tasksList = !localStorage.getItem("tasks") ? [] : JSON.parse(localStorage.getItem("tasks"))
+  const [task, setTask] = useState(tasksList)
 
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(task))
+  }, [task])
+
+  //* Delete task
   const handleDelete = (index) => {
     const newTasks = task.filter((value, arrayIndex) => arrayIndex != index)
 
